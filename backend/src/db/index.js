@@ -11,7 +11,8 @@ async function connect() {
 		databaseLog(
 			`!! MONGODB CONNECTED !! DB HOST: ${connectionInstance.connection.host}`
 		);
-		console.log();
+		console.log(
+			`!! MONGODB CONNECTED !! DB HOST: ${connectionInstance.connection.host}`);
 		
 	} catch (error) {
 		databaseLog(`!! MONGODB CONNECTION ERROR: ${error.message}`);
