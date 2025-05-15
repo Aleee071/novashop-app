@@ -3,6 +3,7 @@
 	"module": "app.js",
 	"type": "module",
 	"scripts": {
+		"start": "node -r dotenv/config src/app.js",
 		"dev": "nodemon -r dotenv/config --experimental-json-modules src/app.js",
 		"debug": "DEBUG=app:* nodemon -r dotenv/config src/app.js"
 	},
