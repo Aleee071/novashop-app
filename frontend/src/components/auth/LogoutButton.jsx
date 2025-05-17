@@ -40,8 +40,14 @@ function LogoutButton({ className, onClick }) {
 	};
 
 	return (
-		<button onClick={handleLogout} className={`... ${className}`}>
-			<LogOut size={18} className='mr-2 ...' />
+		<button
+			onClick={handleLogout}
+			className={`bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white ml-2 py-2 px-4 rounded-lg flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-indigo-900/30 group ${className}`}
+		>
+			<LogOut
+				size={18}
+				className='mr-2 transition-transform duration-300 group-hover:translate-x-1'
+			/>
 			<span>Logout</span>
 		</button>
 	);
