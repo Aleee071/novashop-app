@@ -73,8 +73,16 @@ const registerUser = asyncHandler(async (req, res) => {
 	// send response
 	return res
 		.status(201)
-		.cookie("accessToken", accessToken, { httpOnly: true, secure: true })
-		.cookie("refreshToken", refreshToken, { httpOnly: true, secure: true })
+		.cookie("accessToken", accessToken, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === "production",
+			sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+		})
+		.cookie("refreshToken", refreshToken, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === "production",
+			sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+		})
 		.json(
 			new ApiResponse(
 				201,
@@ -149,13 +157,13 @@ const loginUser = asyncHandler(async (req, res) => {
 		.status(200)
 		.cookie("accessToken", accessToken, {
 			httpOnly: true,
-			secure: true,
-			sameSite: "None",
+			secure: process.env.NODE_ENV === "production",
+			sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 		})
 		.cookie("refreshToken", newRefreshToken, {
 			httpOnly: true,
-			secure: true,
-			sameSite: "None",
+			secure: process.env.NODE_ENV === "production",
+			sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 		})
 		.json(
 			new ApiResponse(
@@ -214,8 +222,6 @@ const getUser = asyncHandler(async (req, res) => {
 	// Get access token from cookie and decode it
 	let tokenExpiry = null;
 	const token = req.cookies?.accessToken;
-
-	console.log(" Token: ", token);
 
 	if (token) {
 		try {
@@ -321,7 +327,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 			.cookie("refreshToken", newRefreshToken, {
 				httpOnly: true,
 				secure: process.env.NODE_ENV === "production", // Only use in production
-				sameSite: "strict",
+				sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 			})
 			.json(
 				new ApiResponse(
@@ -389,12 +395,12 @@ const changePassword = asyncHandler(async (req, res) => {
 		.cookie("accessToken", accessToken, {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === "production",
-			sameSite: "strict",
+			sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 		})
 		.cookie("refreshToken", newRefreshToken, {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === "production",
-			sameSite: "strict",
+			sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 		})
 		.json(new ApiResponse(200, null, "Password changed successfully"));
 });

@@ -79,12 +79,12 @@ const createOwner = asyncHandler(async (req, res) => {
 			.cookie("accessToken", accessToken, {
 				httpOnly: true,
 				secure: process.env.NODE_ENV === "production",
-				sameSite: "strict",
+				sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 			})
 			.cookie("refreshToken", refreshToken, {
 				httpOnly: true,
 				secure: process.env.NODE_ENV === "production",
-				sameSite: "strict",
+				sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 			})
 			.json(
 				new ApiResponse(
@@ -157,13 +157,13 @@ const loginOwner = asyncHandler(async (req, res) => {
 		.status(200)
 		.cookie("accessToken", accessToken, {
 			httpOnly: true,
-			secure: true,
-			sameSite: "strict",
+			secure: process.env.NODE_ENV === "production",
+			sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 		})
 		.cookie("refreshToken", newRefreshToken, {
 			httpOnly: true,
-			secure: true,
-			sameSite: "strict",
+			secure: process.env.NODE_ENV === "production",
+			sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 		})
 		.json(
 			new ApiResponse(
@@ -464,12 +464,12 @@ const refreshToken = asyncHandler(async (req, res) => {
 			.cookie("accessToken", accessToken, {
 				httpOnly: true,
 				secure: process.env.NODE_ENV === "production",
-				sameSite: "strict",
+				sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 			})
 			.cookie("refreshToken", newRefreshToken, {
 				httpOnly: true,
 				secure: process.env.NODE_ENV === "production",
-				sameSite: "strict",
+				sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 			})
 			.json(new ApiResponse(200, { tokenExpiry }, "Token refreshed"));
 	} catch (err) {
