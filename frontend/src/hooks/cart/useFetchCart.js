@@ -3,17 +3,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { getCart } from "../../api/cart";
 import handleToastPromise from "../../utils/handleToastPromise";
 
-let mountedRef = false;
-
 function useFetchCart() {
-	const role = localStorage.getItem("role");
-
-	if (role !== "user") return {};
-
 	const dispatch = useDispatch();
 	const { cart } = useSelector((state) => state.cart);
 
+	const role = localStorage.getItem("role");
+	const isUser = role === "user";
+
+	let mountedRef = false;
+
 	const refetch = useCallback(async () => {
+		if (!isUser) return;
+
 		await handleToastPromise(
 			dispatch(getCart()).unwrap(),
 			"🛒 Cart fetched successfully",
@@ -22,6 +23,8 @@ function useFetchCart() {
 	}, [dispatch]);
 
 	useEffect(() => {
+		if (!isUser) return;
+
 		if (!mountedRef) {
 			mountedRef = true;
 			if (!cart?.products?.length) {

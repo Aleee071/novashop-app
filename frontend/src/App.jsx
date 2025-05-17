@@ -4,9 +4,11 @@ import Footer from "./components/layout/Footer";
 import { Outlet } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
+import useInitialFetch from "./hooks/useInitialFetch";
 
 function App() {
 	useAuthRefresh();
+	useInitialFetch();
 
 	return (
 		<>

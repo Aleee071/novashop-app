@@ -7,15 +7,15 @@ function useRegisterOwner() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const register = async (formData) =>
-		await handleToastPromise(
-			dispatch(createOwner(formData))
-				.unwrap()
-				.then(() => navigate("/owner/login")),
+	const register = async (formData) => {
+		const res = await handleToastPromise(
+			dispatch(createOwner(formData)).unwrap(),
 			"Registration successful!",
 			"Registration failed"
 		);
 
+		res.owner && navigate("/owner/login");
+	};
 	return { register };
 }
 

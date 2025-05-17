@@ -26,9 +26,13 @@ const OwnerDashboard = () => {
 	const [activeTab, setActiveTab] = useState("products");
 	const [searchTerm, setSearchTerm] = useState("");
 	const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
-	const { ordersByOwner } = useSelector((state) => state.order);
+	const { ordersByOwner, isLoading: ordersLoading } = useSelector(
+		(state) => state.order
+	);
 	const { owner, isLoading } = useSelector((state) => state.owner);
-	const { productsByOwner } = useSelector((state) => state.product);
+	const { productsByOwner, isLoading: productsLoading } = useSelector(
+		(state) => state.product
+	);
 	const dispatch = useDispatch();
 	const ownerId = owner?._id;
 
@@ -123,6 +127,8 @@ const OwnerDashboard = () => {
 
 	return (
 		<div className='min-h-screen bg-gray-950 text-white'>
+			{isLoading || productsLoading || ordersLoading ? <Loading /> : ""}
+
 			{/* Top navbar */}
 			<header className='bg-gradient-to-r sticky top-[calc(124px)] max-sm:top-[calc(104px)] sm:top-[calc(106px)] z-50  from-indigo-900 to-purple-900 bg-opacity-95 backdrop-blur-md py-4 border-b border-gray-800 '>
 				<div className='container mx-auto px-4'>

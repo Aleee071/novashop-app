@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Info, HelpCircle } from "lucide-react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { createOwner } from "../../api/owner.js";
 import { useRegisterUser } from "../../hooks/user";
 import { useRegisterOwner } from "../../hooks/owner";
 

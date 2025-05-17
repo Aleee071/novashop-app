@@ -1,10 +1,8 @@
 import Loading from "../components/Loading";
 import { useSelector } from "react-redux";
 import ProductCard from "../components/ProductCard";
-import useInitialFetch from "../hooks/useInitialFetch";
 
 function Home() {
-	useInitialFetch();
 	const { isLoading, products } = useSelector((state) => state.product);
 
 	return (

@@ -48,8 +48,6 @@ const ownerSlice = createSlice({
 			})
 			.addCase(createOwner.fulfilled, (state, action) => {
 				state.isLoading = false;
-				state.owner = action.payload.owner;
-				state.tokenExpiry = action.payload.tokenExpiry;
 			})
 			.addCase(createOwner.rejected, (state, action) => {
 				state.isLoading = false;

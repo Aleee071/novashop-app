@@ -156,12 +156,12 @@ const loginUser = asyncHandler(async (req, res) => {
 	return res
 		.status(200)
 		.cookie("accessToken", accessToken, {
-			httpOnly: true,
+			httpOnly: false,
 			secure: process.env.NODE_ENV === "production",
 			sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 		})
 		.cookie("refreshToken", newRefreshToken, {
-			httpOnly: true,
+			httpOnly: false,
 			secure: process.env.NODE_ENV === "production",
 			sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 		})

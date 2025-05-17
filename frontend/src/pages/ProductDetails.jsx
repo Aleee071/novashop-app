@@ -10,7 +10,12 @@ import {
 	X,
 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct, getProduct, updateProduct } from "../api/product";
+import {
+	deleteProduct,
+	getProduct,
+	getProducts,
+	updateProduct,
+} from "../api/product";
 import toast from "react-hot-toast";
 import Loading from "../components/Loading";
 import { addProductToCart, getCart } from "../api/cart";
@@ -120,15 +125,21 @@ const ProductDetails = () => {
 	};
 
 	const handleDeleteProduct = async () => {
-		await handleToastPromise(
-			dispatch(deleteProduct(currentProduct?._id))
-				.unwrap()
-				.then(() => {
-					navigate("/");
-				}),
+		const res = await handleToastPromise(
+			dispatch(deleteProduct(currentProduct?._id)).unwrap(),
 			"Product deleted successfully",
 			"Failed to delete product"
 		);
+
+		if (res.status === 200) {
+			await handleToastPromise(
+				dispatch(getProducts()).unwrap(),
+				"Product fetched successfully",
+				"Failed to fetch product"
+			);
+
+			navigate("/");
+		}
 	};
 
 	// handle image
