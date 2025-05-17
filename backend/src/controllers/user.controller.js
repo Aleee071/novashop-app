@@ -147,8 +147,16 @@ const loginUser = asyncHandler(async (req, res) => {
 	// send response
 	return res
 		.status(200)
-		.cookie("accessToken", accessToken, { httpOnly: true, secure: true })
-		.cookie("refreshToken", newRefreshToken, { httpOnly: true, secure: true })
+		.cookie("accessToken", accessToken, {
+			httpOnly: true,
+			secure: true,
+			sameSite: "None",
+		})
+		.cookie("refreshToken", newRefreshToken, {
+			httpOnly: true,
+			secure: true,
+			sameSite: "None",
+		})
 		.json(
 			new ApiResponse(
 				200,
@@ -207,6 +215,8 @@ const getUser = asyncHandler(async (req, res) => {
 	let tokenExpiry = null;
 	const token = req.cookies?.accessToken;
 
+	console.log(" Token: ", token);
+
 	if (token) {
 		try {
 			const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_JWT_SECRET);
@@ -262,7 +272,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 	auth("Received request to refresh access token");
 
 	const refreshToken = req.cookies?.refreshToken;
-	
+
 	if (!refreshToken) {
 		error("Access token refresh failed: Refresh token not found");
 		throw new ApiError("Refresh token not found", 401);
