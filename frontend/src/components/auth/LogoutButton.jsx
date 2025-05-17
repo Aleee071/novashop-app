@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../api/auth";
 import { logoutOwner } from "../../api/owner";
@@ -15,7 +14,12 @@ function LogoutButton({ className, onClick }) {
 	const handleLogout = async () => {
 		if (user) {
 			await handleToastPromise(
-				dispatch(logoutUser()).unwrap().then(() => navigate("/login")),
+				dispatch(logoutUser())
+					.unwrap()
+					.then(() => {
+						localStorage.removeItem("role");
+						navigate("/login");
+					}),
 				"Logged out successfully",
 				"Failed to logout"
 			);
@@ -23,7 +27,10 @@ function LogoutButton({ className, onClick }) {
 			await handleToastPromise(
 				dispatch(logoutOwner())
 					.unwrap()
-					.then(() => navigate("/owner/login")),
+					.then(() => {
+						localStorage.removeItem("role");
+						navigate("/owner/login");
+					}),
 				"Owner logged out successfully",
 				"Failed to logout owner"
 			);
