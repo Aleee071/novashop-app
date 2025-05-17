@@ -23,8 +23,9 @@ export default function useInitialFetch() {
 	useEffect(() => {
 		const fetchData = async () => {
 			const promises = [];
+			const token = document.cookie.match(/accessToken=/);
 
-			if (role === "user" && !user?._id && !isLoading) {
+			if (role === "user" && !user?._id && !isLoading && token) {
 				promises.push(
 					handleToastPromise(
 						dispatch(getUser()).unwrap(),
@@ -32,7 +33,7 @@ export default function useInitialFetch() {
 						"Failed to fetch user"
 					)
 				);
-			} else if (role === "owner" && !owner?._id && !ownerLoading) {
+			} else if (role === "owner" && !owner?._id && !ownerLoading && token) {
 				promises.push(
 					handleToastPromise(
 						dispatch(getOwner()).unwrap(),
