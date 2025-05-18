@@ -5,7 +5,7 @@ import { getUser } from "../api/auth";
 import { getOwner } from "../api/owner";
 import handleToastPromise from "../utils/handleToastPromise";
 import { useFetchCart } from "./cart";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 export default function useInitialFetch() {
 	const { refetch: fetchCart } = useFetchCart();
@@ -22,12 +22,12 @@ export default function useInitialFetch() {
 	const userCart = user?.cart?.[0]?._id;
 
 	useEffect(() => {
-		const token = Cookies.get("accessToken");
+		// const token = Cookies.get("accessToken");
 
 		const fetchData = async () => {
 			const promises = [];
 
-			if (role === "user" && !user?._id && !isLoading && token) {
+			if (role === "user" && !user?._id && !isLoading) {
 				promises.push(
 					handleToastPromise(
 						dispatch(getUser()).unwrap(),
@@ -35,7 +35,7 @@ export default function useInitialFetch() {
 						"Failed to fetch user"
 					)
 				);
-			} else if (role === "owner" && !owner?._id && !ownerLoading && token) {
+			} else if (role === "owner" && !owner?._id && !ownerLoading) {
 				promises.push(
 					handleToastPromise(
 						dispatch(getOwner()).unwrap(),
