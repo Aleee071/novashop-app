@@ -17,9 +17,9 @@ export default function Cart() {
 	const { isLoading, cart } = useSelector((state) => state.cart);
 
 	// Custom hooks
+	const { refetch } = useFetchCart();
 	const clearCart = useClearCart();
 	const createOrder = useCreateOrder();
-	const { refetch } = useFetchCart();
 
 	// Environment
 	const baseUrl = import.meta.env.VITE_REACT_BASE_URL;

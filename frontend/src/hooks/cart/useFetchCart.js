@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getCart } from "../../api/cart";
 import handleToastPromise from "../../utils/handleToastPromise";
@@ -10,7 +10,7 @@ function useFetchCart() {
 	const role = localStorage.getItem("role");
 	const isUser = role === "user";
 
-	let mountedRef = false;
+	const mountedRef = useRef(false);
 
 	const refetch = useCallback(async () => {
 		if (!isUser) return;
@@ -24,14 +24,13 @@ function useFetchCart() {
 
 	useEffect(() => {
 		if (!isUser) return;
-
-		if (!mountedRef) {
-			mountedRef = true;
+		if (!mountedRef.current) {
+			mountedRef.current = true;
 			if (!cart?.products?.length) {
 				refetch();
 			}
 		}
-	}, [cart?.products?.length, dispatch, refetch]);
+	}, [dispatch, cart?.products?.length, refetch, isUser]);
 
 	return { refetch };
 }

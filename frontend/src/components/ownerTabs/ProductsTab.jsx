@@ -13,7 +13,6 @@ import {
 	CheckCircle,
 	Package,
 	PackageX,
-	PlusCircle,
 } from "lucide-react";
 import handleToastPromise from "../../utils/handleToastPromise";
 import { updateOrder } from "../../api/order";
@@ -164,7 +163,7 @@ const ProductsTab = ({
 					<div className='px-6 py-4'>
 						<div className='flex justify-between items-center border-b py-3 border-gray-800'>
 							<h3 className='text-lg font-semibold'>My Products</h3>
-							<span className='bg-gradient-to-r from-indigo-700 to-violet-500 px-3 py-1 rounded-lg shadow text-md'>
+							<span className='bg-gradient-to-r from-indigo-700 to-violet-500 px-3 py-1.5 rounded-lg shadow text-sm font-medium'>
 								{products?.length}
 							</span>
 						</div>
@@ -202,21 +201,9 @@ const ProductsTab = ({
 				<div className='flex items-center justify-between px-6 py-4 border-b border-gray-800'>
 					<h3 className='text-lg font-semibold'>My Orders</h3>
 
-					<div className='flex items-center space-x-2'>
-						<select className='bg-gray-800 border border-gray-700 rounded text-sm px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500'>
-							<option>All Orders</option>
-							<option>Pending</option>
-							<option>Completed</option>
-							<option>Cancelled</option>
-						</select>
-
-						<select className='bg-gray-800 border border-gray-700 rounded text-sm px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500'>
-							<option>Last 30 days</option>
-							<option>Last 7 days</option>
-							<option>Today</option>
-							<option>All time</option>
-						</select>
-					</div>
+					<span className='bg-gradient-to-r from-indigo-700 to-violet-500 px-3 py-1.5 rounded-lg shadow text-sm font-medium'>
+						{orders?.length}
+					</span>
 				</div>
 
 				<div className='p-6'>

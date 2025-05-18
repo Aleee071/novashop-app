@@ -11,8 +11,6 @@ function useClearCart() {
 			"🧹 Cart cleared successfully",
 			"❌ Failed to clear cart"
 		);
-
-		console.log("Cart cleared");
 	};
 
 	return clear;

@@ -67,7 +67,12 @@ export default function useInitialFetch() {
 
 	useEffect(() => {
 		async function fetchCartData() {
-			if (user?._id && userCart !== cart?._id && role === "user") {
+			if (
+				role === "user" &&
+				!isLoading &&
+				user?._id &&
+				userCart !== cart?._id
+			) {
 				await fetchCart();
 			}
 		}
