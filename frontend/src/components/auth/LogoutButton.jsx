@@ -32,7 +32,7 @@ function LogoutButton({ className, onClick }) {
 				"accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
 			document.cookie =
 				"refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
-			localStorage.removeItem("role");
+			localStorage.clear();
 			if (onClick) onClick();
 		} catch (err) {
 			// handleToastPromise already shows error toast

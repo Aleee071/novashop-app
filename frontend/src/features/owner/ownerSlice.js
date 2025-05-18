@@ -17,6 +17,7 @@ const ownerSlice = createSlice({
 		isLoading: false,
 		error: null,
 		tokenExpiry: null,
+		role: localStorage.getItem("role"),
 	},
 	reducers: {
 		clearOwnerState: (state) => {
@@ -63,6 +64,7 @@ const ownerSlice = createSlice({
 				state.isLoading = false;
 				state.owner = action.payload.owner;
 				state.tokenExpiry = action.payload.tokenExpiry;
+				state.role = localStorage.getItem("role");
 			})
 			.addCase(loginOwner.rejected, (state, action) => {
 				state.isLoading = false;
@@ -105,6 +107,8 @@ const ownerSlice = createSlice({
 			.addCase(logoutOwner.fulfilled, (state) => {
 				state.isLoading = false;
 				state.owner = null;
+				state.tokenExpiry = null;
+				state.role = null;
 			})
 			.addCase(logoutOwner.rejected, (state, action) => {
 				state.isLoading = false;

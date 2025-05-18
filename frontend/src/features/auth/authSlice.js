@@ -14,6 +14,7 @@ const authSlice = createSlice({
 		error: null,
 		isLoading: false,
 		tokenExpiry: null,
+		role: localStorage.getItem("role"),
 	},
 	reducers: {},
 	extraReducers: (builder) => {
@@ -73,6 +74,7 @@ const authSlice = createSlice({
 				state.isLoading = false;
 				state.error = null;
 				state.tokenExpiry = null;
+				state.role = null;
 			})
 			.addCase(logoutUser.rejected, (state, action) => {
 				state.isLoading = false;
