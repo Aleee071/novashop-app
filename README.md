@@ -99,16 +99,26 @@ _All protected routes are secured via JWT middleware and role-based access._
 
 #### 📁 Environment Variables
 
-# 🔧 Frontend (.env):
-VITE_API_BASE_URL="http://localhost:xxxx/api"
-VITE_REACT_BASE_URL="http://localhost:xxxx"
+🔧 Frontend (.env):
+Base URL of your backend API
+- `VITE_API_BASE_URL="http://localhost:5000/api"`
 
-# 🔧 Backend (.env):
-PORT=XXXX
-MONGO_URI=your_mongodb_uri
-CORS_ORIGIN=""
-ACCESS_TOKEN_JWT_SECRET=""
-REFRESH_TOKEN_JWT_SECRET=""
+Base URL of your frontend app (used in redirects, etc.)
+- `VITE_REACT_BASE_URL="http://localhost:5173"`
+
+🔧 Backend (.env):
+Port the server will run on
+- `PORT=5000`
+
+Your MongoDB connection string
+- `MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/dbname`
+
+Allowed frontend origin for CORS
+- `CORS_ORIGIN=http://localhost:5173`
+
+JWT secrets for authentication
+- `ACCESS_TOKEN_JWT_SECRET=your_access_token_secret`
+- `REFRESH_TOKEN_JWT_SECRET=your_refresh_token_secret`
 
 ```bash
 # Clone the repository
