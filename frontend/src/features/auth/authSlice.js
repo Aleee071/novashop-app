@@ -41,6 +41,7 @@ const authSlice = createSlice({
 				state.isLoading = false;
 				state.user = action.payload.user;
 				state.tokenExpiry = action.payload.tokenExpiry;
+				state.role = localStorage.getItem("role");
 			})
 			.addCase(loginUser.rejected, (state, action) => {
 				state.isLoading = false;
@@ -95,6 +96,7 @@ const authSlice = createSlice({
 				state.error = action.payload;
 				state.user = null;
 				state.tokenExpiry = null;
+				state.role = null;
 			});
 	},
 });

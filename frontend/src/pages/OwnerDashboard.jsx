@@ -59,20 +59,6 @@ const OwnerDashboard = () => {
 	];
 
 	useEffect(() => {
-		async function fetchOwner() {
-			if (!ownerId) {
-				await handleToastPromise(
-					dispatch(getOwner()).unwrap(),
-					"Owner fetched successfully",
-					"Failed to fetch owner"
-				);
-			}
-		}
-
-		fetchOwner();
-	}, [dispatch, ownerId]);
-
-	useEffect(() => {
 		async function load() {
 			if (ownerId && productsByOwner?.[0]?.owner !== ownerId) {
 				await fetchOrdersByOwner();

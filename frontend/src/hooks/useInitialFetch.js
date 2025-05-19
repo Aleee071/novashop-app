@@ -34,8 +34,6 @@ export default function useInitialFetch() {
 					)
 				);
 			} else if (ownerRole === "owner" && !owner?._id && !ownerLoading) {
-				console.log("Fetching owner...");
-
 				promises.push(
 					handleToastPromise(
 						dispatch(getOwner()).unwrap(),
@@ -61,7 +59,7 @@ export default function useInitialFetch() {
 				console.error("Error fetching initial data:", error);
 			}
 		};
-
+		
 		fetchData();
 	}, [role, user?._id, owner?._id, products.length]);
 
